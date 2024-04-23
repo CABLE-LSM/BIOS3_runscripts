@@ -593,7 +593,7 @@ elif [[ "${system}" == "sb8430@gadi" ]] ; then
     # Run directory: runpath="${sitepath}/run"
     #sitepath="/g/data/x45/BIOS3_output/${experiment}" # Results
     sitepath="/scratch/tm70/sb8430/BIOStests/${experiment}" # Results
-    workpath="/scratch/tm70/sb8430/BIOStests/BLAZEruns" # run directory
+    workpath="/scratch/tm70/sb8430/BIOStests/BLAZERuns" # run directory
     cablehome="/home/189/sb8430/cable" # model home
     # Cable executable
     if [[ ${dompi} -eq 1 ]] ; then
