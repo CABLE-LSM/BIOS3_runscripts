@@ -46,7 +46,7 @@
 #PBS -l mem=48GB
 #PBS -l ncpus=48
 # #PBS -l jobfs=1GB
-#PBS -l storage=gdata/x45+gdata/rp23+gdata/wd9
+#PBS -l storage=gdata/rp23
 #PBS -l software=netCDF:MPI:Intel:GNU
 #PBS -r y
 #PBS -l wd
@@ -602,10 +602,10 @@ elif [[ "${system}" == "sb8430@gadi" ]] ; then
         exe="${cablehome}/offline/cable"
     fi
     # CABLE-AUX directory (uses offline/gridinfo_CSIRO_1x1.nc and offline/modis_phenology_csiro.txt)
-    aux="/g/data/wd9/BenchMarking/CABLE-AUX_v20240122"
-    BlazeDataPath="/g/data/x45/Data_BLAZE"
+    aux=""
+    BlazeDataPath="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/Data_BLAZE"
     # Global Mask
-    SurfaceFile="${aux}/offline/gridinfo_CSIRO_CRU05x05_4tiles.nc"   # note that SurfaceFile does not need subsetting
+    SurfaceFile="/g/data/rp23/data/no_provenance/gridinfo/gridinfo_CSIRO_CRU05x05_4tiles.nc"   # note that SurfaceFile does not need subsetting
     # Global Met
     if [[ "${mettype}" == "cru" ]] ; then
 	      GlobalLandMaskFile="/g/data/x45/ipbes/masks/glob_ipsl_1x1.nc"
@@ -623,7 +623,7 @@ elif [[ "${system}" == "sb8430@gadi" ]] ; then
         GlobalLandMaskFile="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/BIOS3_forcing/reccap1000pts/reccap1000pts" # no file extension
         GlobalMetPath="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/BIOS3_forcing/reccap1000pts/met/"          # last slash is needed - updated 29/3/2024
         ParamPath="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/BIOS3_forcing/reccap1000pts/params/" 
-        GlobalTransitionFilePath="/g/data/x45/LUH2/v3h/${degrees}deg_aust/EXTRACT"
+        GlobalTransitionFilePath="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/LUH2/v3h/${degrees}deg_aust/EXTRACT"
     fi
     # Global LUC
     # GlobalTransitionFilePath="/g/data/x45/LUH2/GCB_2019/1deg/EXTRACT"
