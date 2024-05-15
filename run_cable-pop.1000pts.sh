@@ -35,8 +35,8 @@
 
 # Gadi
 # https://opus.nci.org.au/display/Help/How+to+submit+a+job
-#PBS -N mc_01
-#PBS -P x45
+#PBS -N CABLE_BIOS_test
+#PBS -P tm70
 # express / normal / copyq (2x24, cascadelake)
 #PBS -q normal
 # Typical for global or Aust continent at 0.25, 192 GB memory and 48 cpus,
@@ -46,13 +46,13 @@
 #PBS -l mem=48GB
 #PBS -l ncpus=48
 # #PBS -l jobfs=1GB
-#PBS -l storage=gdata/x45
+#PBS -l storage=gdata/rp23
 #PBS -l software=netCDF:MPI:Intel:GNU
 #PBS -r y
 #PBS -l wd
 #PBS -j oe
 #PBS -S /bin/bash
-#PBS -M ian.harman@csiro.au
+#PBS -M sean.bryan@anu.edu.au
 #PBS -m ae
 
 # cuntz@explor, cuntz@mc16, cuntz@mcinra, moc801@gadi cuntz@gadi
@@ -62,7 +62,7 @@
 # nieradzik@aurora
 # inh599@gadi harman@gadi 
 
-system=inh599@gadi
+system=sb8430@gadi
 
 # MPI run or single processor run
 # nproc should fit with job tasks
@@ -586,6 +586,45 @@ elif [[ "${system}" == "inh599@gadi" || "${system}" == "harman@gadi" ]] ; then
         GlobalMetPath="/g/data/x45/BIOS3_forcing/reccap1000pts/met/"          # last slash is needed - updated 29/3/2024
 	ParamPath="/g/data/x45/BIOS3_forcing/reccap1000pts/params/" 
         GlobalTransitionFilePath="/g/data/x45/LUH2/v3h/${degrees}deg_aust/EXTRACT"
+    fi
+    # Global LUC
+    # GlobalTransitionFilePath="/g/data/x45/LUH2/GCB_2019/1deg/EXTRACT"
+
+elif [[ "${system}" == "sb8430@gadi" ]] ; then
+    # Run directory: runpath="${sitepath}/run"
+    #sitepath="/g/data/x45/BIOS3_output/${experiment}" # Results
+    sitepath="/scratch/tm70/sb8430/BIOStests/${experiment}" # Results
+    workpath="/scratch/tm70/sb8430/BIOStests/BLAZERuns" # run directory
+    cablehome="/home/189/sb8430/cable" # model home
+    # Cable executable
+    if [[ ${dompi} -eq 1 ]] ; then
+        exe="${cablehome}/offline/cable-mpi"
+    else
+        exe="${cablehome}/offline/cable"
+    fi
+    # CABLE-AUX directory (uses offline/gridinfo_CSIRO_1x1.nc and offline/modis_phenology_csiro.txt)
+    aux=""
+    BlazeDataPath="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/Data_BLAZE"
+    # Global Mask
+    SurfaceFile="/g/data/rp23/data/no_provenance/gridinfo/gridinfo_CSIRO_CRU05x05_4tiles.nc"   # note that SurfaceFile does not need subsetting
+    # Global Met
+    if [[ "${mettype}" == "cru" ]] ; then
+	      GlobalLandMaskFile="/g/data/x45/ipbes/masks/glob_ipsl_1x1.nc"
+        GlobalMetPath="/g/data/x45/CRUJRA2020/daily_1deg"
+    elif [[ "${mettype}" == "plume" ]] ; then
+	      GlobalLandMaskFile="/g/data/x45/ipbes/masks/gridinfo_CSIRO_1x1.nc"
+	      GlobalMetPath="/g/data/x45/ipbes/${metmodel}/1deg"
+        # only in plume.nml
+        CO2Path="/g/data/x45/ipbes/co2"
+	      NdepPath="/g/data/x45/ipbes/ndep"
+    elif [[ "${mettype}" == "bios" ]] ; then
+        #GlobalLandMaskFile="/g/data/x45/BIOS3_forcing/acttest9/acttest9" # no file extension
+        #GlobalMetPath="/g/data/x45/BIOS3_forcing/acttest9/met/"          # last slash is needed - updated 29/3/2024
+        #ParamPath="/g/data/x45/BIOS3_forcing/acttest9/params/"           # only in bios.nml
+        GlobalLandMaskFile="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/BIOS3_forcing/reccap1000pts/reccap1000pts" # no file extension
+        GlobalMetPath="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/BIOS3_forcing/reccap1000pts/met/"          # last slash is needed - updated 29/3/2024
+        ParamPath="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/BIOS3_forcing/reccap1000pts/params/" 
+        GlobalTransitionFilePath="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/LUH2/v3h/${degrees}deg_aust/EXTRACT"
     fi
     # Global LUC
     # GlobalTransitionFilePath="/g/data/x45/LUH2/GCB_2019/1deg/EXTRACT"
