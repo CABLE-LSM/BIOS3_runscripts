@@ -615,12 +615,9 @@ elif [[ "${system}" == "sb8430@gadi" ]] ; then
         CO2Path="/g/data/x45/ipbes/co2"
 	      NdepPath="/g/data/x45/ipbes/ndep"
     elif [[ "${mettype}" == "bios" ]] ; then
-        #GlobalLandMaskFile="/g/data/x45/BIOS3_forcing/acttest9/acttest9" # no file extension
-        #GlobalMetPath="/g/data/x45/BIOS3_forcing/acttest9/met/"          # last slash is needed - updated 29/3/2024
-        #ParamPath="/g/data/x45/BIOS3_forcing/acttest9/params/"           # only in bios.nml
-        GlobalLandMaskFile="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/BIOS3_forcing/reccap1000pts/reccap1000pts" # no file extension
-        GlobalMetPath="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/BIOS3_forcing/reccap1000pts/met/"          # last slash is needed - updated 29/3/2024
-        ParamPath="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/BIOS3_forcing/reccap1000pts/params/"
+        GlobalLandMaskFile="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/BIOS3_forcing/acttest9/acttest9" # no file extension
+        GlobalMetPath="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/BIOS3_forcing/acttest9/met/"          # last slash is needed - updated 29/3/2024
+        ParamPath="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/BIOS3_forcing/acttest9/params/"           # only in bios.nml
         GlobalTransitionFilePath="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/LUH2/v3h/${degrees}deg_aust/EXTRACT"
     fi
     # Global LUC
