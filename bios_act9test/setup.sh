@@ -1,16 +1,18 @@
 #!/bin/bash
 set -e
 
+source config.sh
+
 mkdir outputs restart input logs
 
-while read path; do
+for path in "${INPUT[@]}"; do
     ln -s $path input
-done < inputs.config
+done
 
-while read path; do
-    ln -s $path/* input
-done < restart.config
+if [ ! -z $RESTART ]; then
+    ln -s $RESTART/* input
+fi
 
-while read exe_path; do
-    ln -s $exe_path .
-done < exe.config
+if [ ! -z $EXE ]; then
+    ln -s $EXE .
+fi
