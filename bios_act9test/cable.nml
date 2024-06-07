@@ -68,7 +68,7 @@
     cable_user%RUN_DIAG_LEVEL      = 'BASIC'      ! choices are:
                                                   ! 1. BASIC
                                                   ! 1. NONE
-    cable_user%CONSISTENCY_CHECK   = .TRUE.       ! TRUE outputs combined fluxes at each timestep for comparisson to A control run
+    cable_user%CONSISTENCY_CHECK   = .false.       ! TRUE outputs combined fluxes at each timestep for comparisson to A control run
     cable_user%CASA_DUMP_READ = .false.
     cable_user%CASA_DUMP_WRITE = .false.
     cable_user%CASA_SPIN_STARTYEAR = 1860
