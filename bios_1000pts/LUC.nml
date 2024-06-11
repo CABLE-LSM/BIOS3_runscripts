@@ -1,0 +1,8 @@
+&LUCNML
+    TransitionFilePath = "/g/data/rp23/experiments/2024-04-17_BIOS3-merge/LUH2/v3h/0.05deg_aust/EXTRACT"
+    ClimateFile = "input/bios_climate_rst.nc"
+    DirectRead = .FALSE.
+    YearStart = 1900
+    YearEnd = 2022
+    NotPrimOnlyFile = "none"
+/
