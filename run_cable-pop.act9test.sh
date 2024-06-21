@@ -175,7 +175,7 @@ dofuture=0      # 1/0: Do/Do not future runs (plume only)
 
 # MetType
 mettype='bios'     # 'cru', 'plume', 'bios'
-degrees=0.25       #  bios only: resolution of met and LUC (0.05 or 0.25)
+degrees=0.05       #  bios only: resolution of met and LUC (0.05 or 0.25)
 metmodel='hadgem2' # 'hadgem2', 'ipsl' (only used if mettype='plume')
 RCP='hist'         # 'hist', '2.6', '4.5', '6.0', '8.5' (no future runs if RCP='hist')
 
