@@ -44,7 +44,7 @@
 # Typical for small runs, fewer cpus than pixels
 #PBS -l walltime=02:00:00
 #PBS -l mem=48GB
-#PBS -l ncpus=4
+#PBS -l ncpus=1
 # #PBS -l jobfs=1GB
 #PBS -l storage=gdata/rp23
 #PBS -l software=netCDF:MPI:Intel:GNU
@@ -66,9 +66,9 @@ system=sb8430@gadi
 
 # MPI run or single processor run
 # nproc should fit with job tasks
-dompi=1   # 0: normal run: ./cable
+dompi=0   # 0: normal run: ./cable
           # 1: MPI run: mpiexec -n ${nproc} ./cable_mpi
-nproc=4   # Number of cores for MPI runs
+nproc=1   # Number of cores for MPI runs
           # must be same as above: SBATCH -n nproc or PBS -l ncpus=nproc
 
 # --------------------------------------------------------------------
@@ -186,7 +186,7 @@ Rubisco_params="Bernacchi_2002"   # "Bernacchi_2002" or "Walker_2013"
 coordinate_photosyn=1 # 1/0: Do/Do not coordinate photosynthesis
 coord=F               # T/F: version of photosyn. optimisation (optimised(F) or forced (T))
 acclimate_photosyn=1  # 1/0: Do/Do not acclimate photosynthesis
-call_pop=1          # 1/0: Do/Do not use POP population dynamics model, coupled to CASA
+call_pop=0          # 1/0: Do/Do not use POP population dynamics model, coupled to CASA
 doc13o2=0           # 1/0: Do/Do not calculate 13C
 c13o2_simple_disc=0 # 1/0: simple or full 13C leaf discrimination
 
@@ -595,9 +595,9 @@ elif [[ "${system}" == "sb8430@gadi" ]] ; then
     cablehome="/home/189/sb8430/cable" # model home
     # Cable executable
     if [[ ${dompi} -eq 1 ]] ; then
-        exe="${cablehome}/offline/cable-mpi"
+        exe="${cablehome}/bin/cable-mpi"
     else
-        exe="${cablehome}/offline/cable"
+        exe="${cablehome}/bin/cable"
     fi
     # CABLE-AUX directory (uses offline/gridinfo_CSIRO_1x1.nc and offline/modis_phenology_csiro.txt)
     aux=""
@@ -1338,7 +1338,7 @@ EOF
         cable_user%POP_fromZero           = .true.
         cable_user%POP_out                = "ini"
         cable_user%POP_restart_in         = ""
-        cable_user%POPLUC                 = .true.
+        cable_user%POPLUC                 = .false.
         cable_user%POPLUC_RunType         = "static"
         cable_user%c13o2_restart_in_flux  = ""
         cable_user%c13o2_restart_in_pools = ""
@@ -1408,7 +1408,7 @@ EOF
             cable_user%limit_labile        = .true.
             cable_user%POP_fromZero        = .false.
             cable_user%POP_out             = "ini"
-            cable_user%POPLUC              = .true.
+            cable_user%POPLUC              = .false.
             cable_user%POPLUC_RunType      = "static"
 EOF
         applysed ${tmp}/sedtmp.${pid} ${rdir}/cable_${experiment}.nml ${rdir}/cable.nml
@@ -1469,7 +1469,7 @@ EOF
             cable_user%limit_labile        = .true.
             cable_user%POP_fromZero        = .false.
             cable_user%POP_out             = "ini"
-            cable_user%POPLUC              = .true.
+            cable_user%POPLUC              = .false.
             cable_user%POPLUC_RunType      = "static"
 EOF
         applysed ${tmp}/sedtmp.${pid} ${rdir}/cable_${experiment}.nml ${rdir}/cable.nml
@@ -1540,7 +1540,7 @@ EOF
             cable_user%limit_labile        = .false.
             cable_user%POP_fromZero        = .false.
             cable_user%POP_out             = "ini"
-            cable_user%POPLUC              = .true.
+            cable_user%POPLUC              = .false.
             cable_user%POPLUC_RunType      = "static"
 EOF
         applysed ${tmp}/sedtmp.${pid} ${rdir}/cable_${experiment}.nml ${rdir}/cable.nml
@@ -1601,7 +1601,7 @@ EOF
             cable_user%limit_labile        = .false.
             cable_user%POP_fromZero        = .false.
             cable_user%POP_out             = "ini"
-            cable_user%POPLUC              = .true.
+            cable_user%POPLUC              = .false.
             cable_user%POPLUC_RunType      = "static"
 EOF
         applysed ${tmp}/sedtmp.${pid} ${rdir}/cable_${experiment}.nml ${rdir}/cable.nml
@@ -1678,7 +1678,7 @@ EOF
         cable_user%limit_labile         = .false.
         cable_user%POP_fromZero         = .false.
         cable_user%POP_out              = "ini"
-        cable_user%POPLUC               = .true.
+        cable_user%POPLUC               = .false.
         cable_user%POPLUC_RunType       = "init"
         cable_user%LUC_restart_in       = ""
         cable_user%c13o2_restart_in_luc = ""
@@ -1762,7 +1762,7 @@ EOF
         cable_user%limit_labile        = .false.
         cable_user%POP_fromZero        = .false.
         cable_user%POP_out             = "ini"
-        cable_user%POPLUC              = .true.
+        cable_user%POPLUC              = .false.
         cable_user%POPLUC_RunType      = "static"
 EOF
     applysed ${tmp}/sedtmp.${pid} ${rdir}/cable_${experiment}.nml ${rdir}/cable.nml
@@ -1847,7 +1847,7 @@ EOF
         cable_user%limit_labile        = .false.
         cable_user%POP_fromZero        = .false.
         cable_user%POP_out             = "ini"
-        cable_user%POPLUC              = .true.
+        cable_user%POPLUC              = .false.
         cable_user%POPLUC_RunType      = "static"
 EOF
     applysed ${tmp}/sedtmp.${pid} ${rdir}/cable_${experiment}.nml ${rdir}/cable.nml
@@ -1920,7 +1920,7 @@ EOF
         cable_user%limit_labile        = .false.
         cable_user%POP_fromZero        = .false.
         cable_user%POP_out             = "ini"
-        cable_user%POPLUC              = .true.
+        cable_user%POPLUC              = .false.
         cable_user%POPLUC_RunType      = "static"
 EOF
     applysed ${tmp}/sedtmp.${pid} ${rdir}/cable_${experiment}.nml ${rdir}/cable.nml
