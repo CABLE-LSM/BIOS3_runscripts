@@ -52,7 +52,7 @@
 #PBS -l wd
 #PBS -j oe
 #PBS -S /bin/bash
-#PBS -M sean.bryan@anu.edu.au
+#PBS -M abhaas.goyal@anu.edu.au
 #PBS -m ae
 
 # cuntz@explor, cuntz@mc16, cuntz@mcinra, moc801@gadi cuntz@gadi
@@ -62,7 +62,7 @@
 # nieradzik@aurora
 # inh599@gadi harman@gadi 
 
-system=sb8430@gadi
+system=ag9761@gadi
 
 # MPI run or single processor run
 # nproc should fit with job tasks
@@ -587,12 +587,12 @@ elif [[ "${system}" == "inh599@gadi" || "${system}" == "harman@gadi" ]] ; then
     # Global LUC
     # GlobalTransitionFilePath="/g/data/x45/LUH2/GCB_2019/1deg/EXTRACT"
 
-elif [[ "${system}" == "sb8430@gadi" ]] ; then
+elif [[ "${system}" == "ag9761@gadi" ]] ; then
     # Run directory: runpath="${sitepath}/run"
     #sitepath="/g/data/x45/BIOS3_output/${experiment}" # Results
-    sitepath="/scratch/tm70/sb8430/BIOStests/${experiment}" # Results
-    workpath="/scratch/tm70/sb8430/BIOStests/BLAZERuns" # run directory
-    cablehome="/home/189/sb8430/cable" # model home
+    sitepath="/scratch/tm70/ag9761/BIOStests/${experiment}" # Results
+    workpath="/scratch/tm70/ag9761/BIOStests/BLAZERuns" # run directory
+    cablehome="/home/659/ag9761/ACCESS-NRI/CABLE" # model home
     # Cable executable
     if [[ ${dompi} -eq 1 ]] ; then
         exe="${cablehome}/bin/cable-mpi"
@@ -603,7 +603,7 @@ elif [[ "${system}" == "sb8430@gadi" ]] ; then
     aux=""
     BlazeDataPath="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/Data_BLAZE"
     # Global Mask
-    SurfaceFile="/g/data/rp23/data/no_provenance/gridinfo/gridinfo_CSIRO_CRU05x05_4tiles.nc"   # note that SurfaceFile does not need subsetting
+    SurfaceFile="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/ag9761/data_005/gridinfo_CSIRO_CRU005x005_4tiles.nc"
     # Global Met
     if [[ "${mettype}" == "cru" ]] ; then
 	      GlobalLandMaskFile="/g/data/x45/ipbes/masks/glob_ipsl_1x1.nc"
@@ -618,7 +618,7 @@ elif [[ "${system}" == "sb8430@gadi" ]] ; then
         GlobalLandMaskFile="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/BIOS3_forcing/acttest9/acttest9" # no file extension
         GlobalMetPath="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/BIOS3_forcing/acttest9/met/"          # last slash is needed - updated 29/3/2024
         ParamPath="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/BIOS3_forcing/acttest9/params/"           # only in bios.nml
-        GlobalTransitionFilePath="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/LUH2/v3h/${degrees}deg_aust/EXTRACT"
+        GlobalTransitionFilePath="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/ag9761/LUC-in-TRENDY/LUH2_inputs"
     fi
     # Global LUC
     # GlobalTransitionFilePath="/g/data/x45/LUH2/GCB_2019/1deg/EXTRACT"
@@ -1140,7 +1140,7 @@ cat > ${tmp}/sedtmp.${pid} << EOF
     YearStart          = 1700
     YearEnd            = 2017
 EOF
-applysed ${tmp}/sedtmp.${pid} ${ndir}/LUC.nml ${rdir}/LUC_${experiment}.nml
+applysed ${tmp}/sedtmp.${pid} ${ndir}/luc.nml ${rdir}/LUC_${experiment}.nml
 
 # Blaze namelist !CLN CHECK
 cat > ${tmp}/sedtmp.${pid} << EOF
@@ -1242,7 +1242,7 @@ EOF
         applysed ${tmp}/sedtmp.${pid} ${rdir}/bios_${experiment}.nml ${rdir}/bios.nml
     fi
     # LUC
-    cp ${rdir}/LUC_${experiment}.nml ${rdir}/LUC.nml
+    cp ${rdir}/LUC_${experiment}.nml ${rdir}/luc.nml
     # Cable
     #   do not calculate 13C because there is no 13C in the climate restart file
     #MCTEST
@@ -1280,7 +1280,7 @@ EOF
         ./${iexe} > logs/log_out_cable.txt
     fi
     # save output
-    renameid ${rid} ${mettype}.nml LUC.nml cable.nml
+    renameid ${rid} ${mettype}.nml luc.nml cable.nml
     imv *_${rid}.nml restart/
     cd logs
     renameid ${rid} log_cable.txt log_out_cable.txt
@@ -1311,7 +1311,7 @@ EOF
         applysed ${tmp}/sedtmp.${pid} ${rdir}/bios_${experiment}.nml ${rdir}/bios.nml
     fi
     # LUC
-    cp ${rdir}/LUC_${experiment}.nml ${rdir}/LUC.nml
+    cp ${rdir}/LUC_${experiment}.nml ${rdir}/luc.nml
     # Cable
     #MCTEST
     # cable_user%YearEnd = 1889
@@ -1353,7 +1353,7 @@ EOF
         ./${iexe} > logs/log_out_cable.txt
     fi
     # save output
-    renameid ${rid} ${mettype}.nml LUC.nml cable.nml
+    renameid ${rid} ${mettype}.nml luc.nml cable.nml
     imv *_${rid}.nml restart/
     cd logs
     renameid ${rid} log_cable.txt log_out_cable.txt
@@ -1388,7 +1388,7 @@ EOF
             applysed ${tmp}/sedtmp.${pid} ${rdir}/bios_${experiment}.nml ${rdir}/bios.nml
         fi
         # LUC
-        cp ${rdir}/LUC_${experiment}.nml ${rdir}/LUC.nml
+        cp ${rdir}/LUC_${experiment}.nml ${rdir}/luc.nml
         # Cable
         #MCTEST
         # cable_user%YearEnd = 1859
@@ -1421,7 +1421,7 @@ EOF
             ./${iexe} > logs/log_out_cable.txt
         fi
         # save output
-        renameid ${rid} ${mettype}.nml LUC.nml cable.nml
+        renameid ${rid} ${mettype}.nml luc.nml cable.nml
         mv *_${rid}.nml restart/
         cd logs
         renameid ${rid} log_cable.txt log_out_cable.txt
@@ -1449,7 +1449,7 @@ EOF
             applysed ${tmp}/sedtmp.${pid} ${rdir}/bios_${experiment}.nml ${rdir}/bios.nml
         fi
         # LUC
-        cp ${rdir}/LUC_${experiment}.nml ${rdir}/LUC.nml
+        cp ${rdir}/LUC_${experiment}.nml ${rdir}/luc.nml
         # Cable
         #MCTEST
         # cable_user%YearEnd = 1859
@@ -1482,7 +1482,7 @@ EOF
             ./${iexe} > logs/log_out_cable.txt
         fi
         # save output
-        renameid ${rid} ${mettype}.nml LUC.nml cable.nml
+        renameid ${rid} ${mettype}.nml luc.nml cable.nml
         mv *_${rid}.nml restart/
         cd logs
         renameid ${rid} log_cable.txt log_out_cable.txt
@@ -1520,7 +1520,7 @@ EOF
             applysed ${tmp}/sedtmp.${pid} ${rdir}/bios_${experiment}.nml ${rdir}/bios.nml
         fi
         # LUC
-        cp ${rdir}/LUC_${experiment}.nml ${rdir}/LUC.nml
+        cp ${rdir}/LUC_${experiment}.nml ${rdir}/luc.nml
         # Cable
         #MCTEST
         # cable_user%YearEnd = 1859
@@ -1553,7 +1553,7 @@ EOF
             ./${iexe} > logs/log_out_cable.txt
         fi
         # save output
-        renameid ${rid} ${mettype}.nml LUC.nml cable.nml
+        renameid ${rid} ${mettype}.nml luc.nml cable.nml
         mv *_${rid}.nml restart/
         cd logs
         renameid ${rid} log_cable.txt log_out_cable.txt
@@ -1581,7 +1581,7 @@ EOF
             applysed ${tmp}/sedtmp.${pid} ${rdir}/bios_${experiment}.nml ${rdir}/bios.nml
         fi
         # LUC
-        cp ${rdir}/LUC_${experiment}.nml ${rdir}/LUC.nml
+        cp ${rdir}/LUC_${experiment}.nml ${rdir}/luc.nml
         # Cable
         #MCTEST
         # cable_user%YearEnd = 1859
@@ -1614,7 +1614,7 @@ EOF
             ./${iexe} > logs/log_out_cable.txt
         fi
         # save output
-        renameid ${rid} ${mettype}.nml LUC.nml cable.nml
+        renameid ${rid} ${mettype}.nml luc.nml cable.nml
         mv *_${rid}.nml restart/
         cd logs
         renameid ${rid} log_cable.txt log_out_cable.txt
@@ -1657,7 +1657,7 @@ EOF
          YearStart = ${YearStart}
          YearEnd   = ${YearEnd}
 EOF
-    applysed ${tmp}/sedtmp.${pid} ${rdir}/LUC_${experiment}.nml ${rdir}/LUC.nml
+    applysed ${tmp}/sedtmp.${pid} ${rdir}/LUC_${experiment}.nml ${rdir}/luc.nml
     # Cable
     #MCTEST
     # cable_user%CASA_SPIN_ENDYEAR = 1859
@@ -1693,7 +1693,7 @@ EOF
         ./${iexe} > logs/log_out_cable.txt
     fi
     # save output
-    renameid ${rid} ${mettype}.nml LUC.nml cable.nml
+    renameid ${rid} ${mettype}.nml luc.nml cable.nml
     mv *_${rid}.nml restart/
     cd logs
     renameid ${rid} log_cable.txt log_out_cable.txt
@@ -1742,7 +1742,7 @@ EOF
          YearStart = ${YearStart}
          YearEnd   = ${YearEnd}
 EOF
-    applysed ${tmp}/sedtmp.${pid} ${rdir}/LUC_${experiment}.nml ${rdir}/LUC.nml
+    applysed ${tmp}/sedtmp.${pid} ${rdir}/LUC_${experiment}.nml ${rdir}/luc.nml
     # Cable
     #MCTEST
     # cable_user%CASA_SPIN_ENDYEAR = 1859
@@ -1775,7 +1775,7 @@ EOF
         ./${iexe} > logs/log_out_cable.txt
     fi
     # save output
-    renameid ${rid} ${mettype}.nml LUC.nml cable.nml
+    renameid ${rid} ${mettype}.nml luc.nml cable.nml
     mv *_${rid}.nml restart/
     cd logs
     renameid ${rid} log_cable.txt log_out_cable.txt
@@ -1826,7 +1826,7 @@ EOF
          YearStart = ${YearStart}
          YearEnd   = ${YearEnd}
 EOF
-    applysed ${tmp}/sedtmp.${pid} ${rdir}/LUC_${experiment}.nml ${rdir}/LUC.nml
+    applysed ${tmp}/sedtmp.${pid} ${rdir}/LUC_${experiment}.nml ${rdir}/luc.nml
     # Cable
     #MCTEST
     # cable_user%CASA_SPIN_ENDYEAR = 1859
@@ -1860,7 +1860,7 @@ EOF
         ./${iexe} > logs/log_out_cable.txt
     fi
     # save output
-    renameid ${rid} ${mettype}.nml LUC.nml cable.nml
+    renameid ${rid} ${mettype}.nml luc.nml cable.nml
     mv *_${rid}.nml restart/
     cd logs
     renameid ${rid} log_cable.txt log_out_cable.txt
@@ -1900,7 +1900,7 @@ EOF
          YearStart = ${YearStart}
          YearEnd   = ${YearEnd}
 EOF
-    applysed ${tmp}/sedtmp.${pid} ${rdir}/LUC_${experiment}.nml ${rdir}/LUC.nml
+    applysed ${tmp}/sedtmp.${pid} ${rdir}/LUC_${experiment}.nml ${rdir}/luc.nml
     # Cable
     #MCTEST
     # cable_user%CASA_SPIN_ENDYEAR = 1859
@@ -1933,7 +1933,7 @@ EOF
         ./${iexe} > logs/log_out_cable.txt
     fi
     # save output
-    renameid ${rid} ${mettype}.nml LUC.nml cable.nml
+    renameid ${rid} ${mettype}.nml luc.nml cable.nml
     mv *_${rid}.nml restart/
     cd logs
     renameid ${rid} log_cable.txt log_out_cable.txt
