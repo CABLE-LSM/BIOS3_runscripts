@@ -140,7 +140,7 @@ doextractsite=0 # 0: Do not extract local meteo, land use nor mask
                 # 1: Do extract only mask at specific site/region (imeteo=1)
                 # 2: Do extract meteo, land use and mask at specific site/region (imeteo=2)
                 #    Does not work with randompoints /= 0 but with latlon
-    experiment=new1000ptsmpi_off
+    experiment=new1000ptsmpi_off_trendy
     randompoints=0   # <0: use -1*randompoints from file ${LandMaskFilePath}/${experiment}_points.csv if existing
                      # 0:  use latlon
                      # >0: generate and use randompoints random grid points from GlobalLandMaskFile
@@ -595,7 +595,7 @@ elif [[ "${system}" == "ag9761@gadi" ]] ; then
     #sitepath="/g/data/x45/BIOS3_output/${experiment}" # Results
     sitepath="/scratch/tm70/ag9761/BIOStests/${experiment}" # Results
     workpath="/scratch/tm70/ag9761/BIOStests/BLAZERuns" # run directory
-    cablehome="/home/659/ag9761/ACCESS-NRI/CABLE" # model home
+    cablehome="/home/659/ag9761/ACCESS-NRI/CABLE_POP-TRENDY" # model home
     # Cable executable
     if [[ ${dompi} -eq 1 ]] ; then
         exe="${cablehome}/bin/cable-mpi"
