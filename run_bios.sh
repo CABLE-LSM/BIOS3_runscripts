@@ -19,7 +19,7 @@
 #PBS -M lachlan.whyborn@anu.edu.au
 #PBS -m ae
 
-source ${pdir}/run_cable-pop_lib.sh
+source run_cable-pop_lib.sh
 
 # MPI run or single processor run
 # nproc should fit with job tasks
