@@ -19,7 +19,7 @@
 #PBS -M lachlan.whyborn@anu.edu.au
 #PBS -m ae
 
-system=lw5085@gadi
+source ${pdir}/run_cable-pop_lib.sh
 
 # MPI run or single processor run
 # nproc should fit with job tasks
@@ -87,8 +87,6 @@ nproc=1   # Number of cores for MPI runs
 # --------------------------------------------------------------------
 # Sequence switches
 #
-
-experiment=ext_newblazempi_off
 
 # Step 1
 doclimate=1     # 1/0: Do/Do not create climate restart file
@@ -171,7 +169,7 @@ if [[ ! -z ${mpiexecdir} ]] ; then export mpiexecdir="${mpiexecdir}/" ; fi
 #
 
 # Run directory: runpath="${sitepath}/run"
-#sitepath="/g/data/x45/BIOS3_output/${experiment}" # Results
+experiment=ext_newblazempi_off
 sitepath="/scratch/rp23/lw5085/BIOStests/${experiment}" # [TODO] Location to write results
 workpath="/scratch/rp23/lw5085/BIOStests/runs" # [TODO] # Location of namelists+parameter files
 cablehome="${HOME}/CABLE-POP-BIOS/" # [TODO] Location of code
@@ -194,6 +192,9 @@ GlobalLandMaskFile="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/BIOS3_forcin
 GlobalMetPath="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/BIOS3_forcing/acttest9/met/"          # last slash is needed - updated 29/3/2024
 ParamPath="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/BIOS3_forcing/acttest9/params/"           # only in bios.nml
 GlobalTransitionFilePath="/g/data/rp23/experiments/2024-04-17_BIOS3-merge/LUH2/v3h/0.05deg_aust/EXTRACT"
+ 
+# Other scripts
+ScriptsPath="${cablehome}/scripts"
 
 runpath="${sitepath}/run"
 
@@ -203,6 +204,10 @@ filename_veg="${workpath}/params_bios/def_veg_params.txt"
 filename_soil="${workpath}/params_bios/def_soil_params.txt"
 casafile_cnpbiome="${workpath}/params_bios/pftlookup.csv"
 
+MetPath=$(abspath ${GlobalMetPath})
+TransitionFilePath=$(abspath ${GlobalTransitionFilePath})
+LandMaskFile=$(absfile ${GlobalLandMaskFile})
+
 # --------------------------------------------------------------------
 # Start Script
 # --------------------------------------------------------------------
@@ -210,8 +215,6 @@ casafile_cnpbiome="${workpath}/params_bios/pftlookup.csv"
 # --------------------------------------------------------------------
 # Helper functions, most functions are in plumber_cable-pop_lib.sh
 #
-
-source ${pdir}/run_cable-pop_lib.sh
 
 # usage of script
 function usage()
