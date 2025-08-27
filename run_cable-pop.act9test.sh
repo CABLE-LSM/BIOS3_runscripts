@@ -1785,6 +1785,8 @@ EOF
     # cable_user%CASA_SPIN_ENDYEAR = 1859
     # cable_user%YearEnd             = ${YearEnd}
     #MCTEST
+    # To turn on LUC, set cable_user%POPLUC = .true. and cable_user%POPLUC_RunType = "restart"
+    # To turn off LUC, set cable_user%POPLUC = .false. and cable_user%POPLUC_RunType = "static"
     cat > ${tmp}/sedtmp.${pid} << EOF
         cable_user%CLIMATE_fromZero    = .false.
         cable_user%YearStart           = ${YearStart}
@@ -1870,6 +1872,8 @@ EOF
     # cable_user%YearStart           = ${YearStart}
     # cable_user%YearEnd             = ${YearEnd}
     #MCTEST
+    # To turn on LUC, set cable_user%POPLUC = .true. and cable_user%POPLUC_RunType = "restart"
+    # To turn off LUC, set cable_user%POPLUC = .false. and cable_user%POPLUC_RunType = "static"
     cat > ${tmp}/sedtmp.${pid} << EOF
         cable_user%CLIMATE_fromZero    = .false.
         cable_user%YearStart           = ${YearStart}
