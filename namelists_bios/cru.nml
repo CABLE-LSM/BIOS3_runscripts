@@ -1,0 +1,26 @@
+&crunml
+    rainFile = "/g/data/rp23/experiments/2024-04-17_BIOS3-merge/lw5085/MetForcing/BIOS_rain_<startdate>_<enddate>.nc"
+    swdnFile = "/g/data/rp23/experiments/2024-04-17_BIOS3-merge/lw5085/MetForcing/BIOS_rad_<startdate>_<enddate>.nc"
+    TmaxFile = "/g/data/rp23/experiments/2024-04-17_BIOS3-merge/lw5085/MetForcing/BIOS_tmax_<startdate>_<enddate>.nc"
+    TminFile = "/g/data/rp23/experiments/2024-04-17_BIOS3-merge/lw5085/MetForcing/BIOS_tmin_<startdate>_<enddate>.nc"
+    vph0900File = "/g/data/rp23/experiments/2024-04-17_BIOS3-merge/lw5085/MetForcing/BIOS_vph09_<startdate>_<enddate>.nc"
+    vph1500File = "/g/data/rp23/experiments/2024-04-17_BIOS3-merge/lw5085/MetForcing/BIOS_vph15_<startdate>_<enddate>.nc"
+    windFile = "/g/data/rp23/experiments/2024-04-17_BIOS3-merge/lw5085/MetForcing/BIOS_wind_<startdate>_<enddate>.nc"
+    LandMaskFile = "/g/data/rp23/experiments/2024-04-17_BIOS3-merge/lw5085/landmasks/Australia_BIOS_1000pts_at_0p05_resolution_landmask.nc"
+    CO2File = "/g/data/rp23/experiments/2024-04-17_BIOS3-merge/lw5085/met_forcing_symlinks/co2_17000101_20221231.txt"
+    rainRecycle = T
+    swdnRecycle = T
+    TmaxRecycle = T
+    TminRecycle = T
+    windRecycle = T
+    vph0900Recycle = T
+    vph1500Recycle = T
+    MetRecycPeriod  = 30
+    RecycStartYear = 1981
+    CO2Method = "1700"
+    NDepMethod = "1850"
+    ReadDiffFrac = .FALSE.
+    DThrs        = 3.0                ! **CABLE** timestep hours (not the met timestep)
+    LeapYears    = .TRUE.
+    DirectRead   = .TRUE.
+/
