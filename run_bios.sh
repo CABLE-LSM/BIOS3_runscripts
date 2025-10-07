@@ -203,7 +203,10 @@ namelistpath="${workpath}/namelists_bios"
 filename_veg="${workpath}/params_bios/def_veg_params.txt"
 filename_soil="${workpath}/params_bios/def_soil_params.txt"
 casafile_cnpbiome="${workpath}/params_bios/pftlookup.csv"
+gm_lut_bernacchi_2002=/g/data/rp23/data/no_provenance/parameter/gm_LUT_351x3601x7_1pt8245_Bernacchi2002.nc
+gm_lut_walker_2013=/g/data/rp23/data/no_provenance/parameter/gm_LUT_351x3601x7_1pt8245_Walker2013.nc
 
+ClimateFile="${sitepath}/mask/bios_climate_rst.nc"
 MetPath=$(abspath ${GlobalMetPath})
 TransitionFilePath=$(abspath ${GlobalTransitionFilePath})
 LandMaskFile=$(absfile ${GlobalLandMaskFile})
@@ -357,7 +360,7 @@ printf "        ClimateFile=${ClimateFile}\n"
 printf "        TransitionFilePath=${TransitionFilePath}\n"
 printf "        gm_lut_bernacchi_2002=${gm_lut_bernacchi_2002}\n"
 printf "        gm_lut_walker_2013=${gm_lut_walker_2013}\n"
-printf "        filename_d13c_atm=${filename_d13c_atm}\n"
+#printf "        filename_d13c_atm=${filename_d13c_atm}\n"
 printf "\n"
 
 # --------------------------------------------------------------------
@@ -369,7 +372,8 @@ filename_soil=$(absfile ${filename_soil})
 casafile_cnpbiome=$(absfile ${casafile_cnpbiome})
 gm_lut_bernacchi_2002=$(absfile ${gm_lut_bernacchi_2002})
 gm_lut_walker_2013=$(absfile ${gm_lut_walker_2013})
-filename_d13c_atm=$(absfile ${filename_d13c_atm})
+# This is not necessary while c13o2 is .false.
+#filename_d13c_atm=$(absfile ${filename_d13c_atm})
 if [[ "${Rubisco_params}" == "Bernacchi_2002" ]] ; then
     filename_gm_lut=${gm_lut_bernacchi_2002}
 elif [[ "${Rubisco_params}" == "Walker_2013" ]] ; then
