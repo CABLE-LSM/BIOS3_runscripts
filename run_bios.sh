@@ -141,7 +141,7 @@ tmp=${TMPDIR:-"/tmp"}
 system=$(echo ${system} | tr A-Z a-z)
 sys=${system#*@}
 user=${system%@*}
-
+sys="gadi"
 # Special things on specific computer system such as loading modules
 
 if [[ "${sys}" == "gadi" ]] ; then
