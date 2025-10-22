@@ -144,22 +144,20 @@ user=${system%@*}
 sys="gadi"
 # Special things on specific computer system such as loading modules
 
-if [[ "${sys}" == "gadi" ]] ; then
-    pdir=${isdir}
-    . /etc/bashrc
-    module purge
-    # module load intel-compiler/2019.5.281
-    # module load intel-mpi/2019.5.281
-    # module load netcdf/4.6.3
-    # module load intel-compiler/2021.5.0
-    # module load intel-mpi/2021.5.1
-    # module load netcdf/4.8.0
-    # # module load hdf5/1.10.5
-    module load intel-compiler-llvm/2023.0.0
-    module load intel-mpi/2021.8.0
-    module load netcdf/4.9.2
-    export mpiexecdir=/apps/intel-mpi/2019.5.281/intel64/bin
-fi
+pdir=${isdir}
+. /etc/bashrc
+module purge
+# module load intel-compiler/2019.5.281
+# module load intel-mpi/2019.5.281
+# module load netcdf/4.6.3
+# module load intel-compiler/2021.5.0
+# module load intel-mpi/2021.5.1
+# module load netcdf/4.8.0
+# # module load hdf5/1.10.5
+module load intel-compiler-llvm/2023.0.0
+module load intel-mpi/2021.8.0
+module load netcdf/4.9.2
+export mpiexecdir=/apps/intel-mpi/2019.5.281/intel64/bin
 if [[ ! -z ${mpiexecdir} ]] ; then export mpiexecdir="${mpiexecdir}/" ; fi
 
 # Directories of things
